@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --buffet-primary: #eb741a;
+  --buffet-dark: #3f1508;
+  --stomach-light: #e8f5e9;
+  --stomach-full: #2e7d32;
+}
+
+body {
+  @apply font-sans antialiased bg-stone-50 text-stone-800;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-stone-100 rounded-full;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-stone-300 rounded-full hover:bg-stone-400;
+}
