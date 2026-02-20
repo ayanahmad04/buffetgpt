@@ -33,7 +33,6 @@ Think of it as a real-time buffet strategist — not just a food recommender.
 ### Prerequisites
 
 - **Python 3.10+**
-- **Node.js 18+**
 - **Docker** (optional)
 
 ### 1. Clone & Install
@@ -42,10 +41,6 @@ Think of it as a real-time buffet strategist — not just a food recommender.
 # Backend
 cd backend
 pip install -r requirements.txt
-
-# Frontend (new terminal)
-cd frontend
-npm install
 ```
 
 ### 2. Configure (Optional)
@@ -60,18 +55,23 @@ VISION_MODEL=gemini
 
 Without a key, the system uses fallback demo dishes — it still works for testing.
 
-### 3. Run
+### 3. Run (Streamlit UI)
+
+Start the backend and the Streamlit UI:
 
 ```bash
 # Terminal 1: Backend
 cd backend && uvicorn app.main:app --reload --port 8000
 
-# Terminal 2: Frontend
-cd frontend && npm run dev
+# Terminal 2: Streamlit UI
+cd streamlit_frontend
+pip install -r requirements.txt
+export BUFFETGPT_API_URL=http://localhost:8000/api/v1
+streamlit run app.py
 ```
 
-- **Frontend:** [http://localhost:5173](http://localhost:5173)
-- **API docs:** [http://localhost:8000/docs](http://localhost:8000/docs)
+- **Streamlit UI:** http://localhost:8501
+- **API docs:** http://localhost:8000/docs
 
 ---
 
@@ -81,7 +81,6 @@ cd frontend && npm run dev
 docker-compose up --build
 ```
 
-- **Frontend:** http://localhost:3000  
 - **Backend:** http://localhost:8000  
 - **API docs:** http://localhost:8000/docs
 
@@ -198,13 +197,9 @@ buffetgpt/
 │   │   └── models/schemas.py
 │   ├── requirements.txt
 │   └── Dockerfile
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── api.js
-│   │   └── App.jsx
-│   ├── package.json
-│   └── Dockerfile
+├── streamlit_frontend/
+│   ├── app.py              # Streamlit UI
+│   └── requirements.txt
 ├── docs/
 │   └── API_EXAMPLES.md
 ├── ARCHITECTURE.md
@@ -227,7 +222,7 @@ buffetgpt/
 
 ## Tech Stack
 
-- **Frontend:** React 18, Vite, Tailwind CSS
+- **Frontend:** Streamlit
 - **Backend:** FastAPI, Python 3.10+
 - **Vision:** Google Gemini (free) / YOLOv8 (optional)
 - **Nutrition:** Embedded USDA-derived dataset
